@@ -1,0 +1,5 @@
+node_modules
+npm-debug.log
+init-mongo.js
+db
+deleteme.yaml
