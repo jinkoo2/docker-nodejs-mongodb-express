@@ -4,7 +4,7 @@ version: '3.1'
 services:
   mongo:
     container_name: mongodb
-    image: mongo
+    image: mongo:4.4.4-bionic
     restart: always
     ports:
     - '27017:27017'
@@ -16,7 +16,7 @@ services:
       - ./mongo/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
       - ./mongo/db:/data/db
   mongo-express:
-    image: mongo-express
+    image: mongo-express:0.54
     restart: always
     ports:
       - 8081:8081
@@ -30,5 +30,11 @@ services:
     container_name: app
     restart: always
     build: ./node-app
+    environment:
+      DB_USER_ID: dbuser
+      DB_USER_PW: dbpw
+      DB_NAME: mydb
+      DB_SERVER: mongodb
+      DB_PORT: 27017
     ports:
       - '80:3000'
